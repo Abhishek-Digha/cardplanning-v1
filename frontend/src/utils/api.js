@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API = axios.create({baseURL:'http://localhost:5000/api'});
+const API = axios.create({baseURL:'https://cardplanning-v1.onrender.com/api'});
 
 export const sessionAPI = {
   createSession: userName => API.post('/sessions',{userName}).then(r=>r.data),

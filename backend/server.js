@@ -31,7 +31,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   'http://localhost:3000',
   'https://abhishek-digha.github.io',
-  'https://abhishek-digha.github.io/cardplanning'
+  'https://abhishek-digha.github.io/cardplanning-v1'
 ];
 app.use(cors({
   origin: allowedOrigins,

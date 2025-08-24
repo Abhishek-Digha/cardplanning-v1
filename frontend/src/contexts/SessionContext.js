@@ -52,7 +52,7 @@ function reducer(state,action){
   useEffect(() => { userRef.current = state.user }, [state.user]);
 
   useEffect(()=>{
-    const socket = io('http://localhost:5000');
+    const socket = io('http://https://cardplanning-v1.onrender.com');
     dispatch({type:'SET',payload:{socket}});
 
    
