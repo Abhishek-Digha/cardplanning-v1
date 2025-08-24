@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cardplanning-v1/static/css/main.bbff3fb1.css",
-    "main.js": "/cardplanning-v1/static/js/main.9fbbad8d.js",
+    "main.js": "/cardplanning-v1/static/js/main.7d6200f4.js",
     "index.html": "/cardplanning-v1/index.html",
     "main.bbff3fb1.css.map": "/cardplanning-v1/static/css/main.bbff3fb1.css.map",
-    "main.9fbbad8d.js.map": "/cardplanning-v1/static/js/main.9fbbad8d.js.map"
+    "main.7d6200f4.js.map": "/cardplanning-v1/static/js/main.7d6200f4.js.map"
   },
   "entrypoints": [
     "static/css/main.bbff3fb1.css",
-    "static/js/main.9fbbad8d.js"
+    "static/js/main.7d6200f4.js"
   ]
 }
