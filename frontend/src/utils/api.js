@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API = axios.create({baseURL:'https://cardplanning-2.onrender.com/api'});
+const API = axios.create({baseURL:'http://localhost:5000/api'});
 
 export const sessionAPI = {
   createSession: userName => API.post('/sessions',{userName}).then(r=>r.data),
@@ -15,4 +15,11 @@ export const sessionAPI = {
   clearVotes:(sid,storyId,uid)=>
     API.post(`/sessions/${sid}/stories/${storyId}/clear`,{userId:uid}).then(r=>r.data),
 
+  // NEW: remove member
+  removeMember: (sessionId, memberId) =>
+    API.post(`/sessions/${sessionId}/remove-member`, { memberId }).then(r => r.data),
+
+  // ✅ New: Fetch all members of a session
+  getMembers: (sessionId) =>
+    API.get(`/sessions/${sessionId}/members`).then((r) => r.data),
 };

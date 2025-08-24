@@ -2,6 +2,9 @@ import React, { createContext, useContext, useReducer, useEffect, useRef } from 
 import { io } from 'socket.io-client';
 import { sessionAPI } from '../utils/api';
 
+
+
+
 const SessionContext = createContext();
 const initialState = {
   session:null, user:null, socket:null,
@@ -43,9 +46,48 @@ function reducer(state,action){
   const sessionIdRef = useRef(null);
   sessionIdRef.current = state.session?.id;
 
+
+  // Create a ref to always have the latest user
+  const userRef = useRef(state.user);
+  useEffect(() => { userRef.current = state.user }, [state.user]);
+
   useEffect(()=>{
-    const socket = io('https://cardplanning-2.onrender.com');
+    const socket = io('http://localhost:5000');
     dispatch({type:'SET',payload:{socket}});
+
+   
+  
+  
+
+  // Inside SessionProvider useEffect
+socket.on('memberRemoved', ({ memberId }) => {
+  // Safely use userRef for current user
+  if (userRef.current?.id === memberId) {
+    dispatch({ 
+      type: 'SET', 
+      payload: { session: null, user: null, votes: {}, voteCount: 0, isRevealed: false } 
+    });
+    alert('You have been removed from this session.');
+     window.location.href = `${window.location.origin}/cardplanning`;
+    return;
+  }
+
+  // Only update members if session exists
+  if (state.session?.members) {
+    dispatch({
+      type: 'SET',
+      payload: {
+        session: {
+          ...state.session,
+          members: state.session.members.filter(m => m.id !== memberId)
+        }
+      }
+    });
+  }
+});
+
+
+
 
    socket.on('memberJoined', async () => {
   if (sessionIdRef.current) {

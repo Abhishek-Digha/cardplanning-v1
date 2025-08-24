@@ -69,22 +69,40 @@ class Story {
 }
 
 // Create session
-app.post('/api/sessions', (req,res)=>{
-  const { userName } = req.body;
-  const userId = uuidv4();
-  const session = new Session(userId,userName);
-  sessions.set(session.id,session);
+app.post('/api/sessions', (req, res) => {
+  const { userName, systemId } = req.body || {};
+  if (!userName) return res.status(400).json({ error: 'userName is required' });
+
+  const adminId = uuidv4();
+  const session = new Session(adminId, userName);
+
+  // enrich the admin member with identity signals
+  const admin = session.members.find(m => m.id === adminId);
+  const ip = getClientIp(req);
+  admin.systemId = systemId || null;
+  admin.ip = ip;
+  admin.userAgent = req.headers['user-agent'] || '';
+  admin.createdAt = Date.now();
+  admin.lastSeenAt = admin.createdAt;
+  admin.joinCount = 1;
+
+  sessions.set(session.id, session);
+
+  const sessionObj = normalizeSessionForClient(session);
+
   res.json({
-    sessionId:session.id,
-    sessionCode:session.code,
-    userId,
-    user:{id:userId,name:userName,isAdmin:true}
+    sessionId: session.id,
+    sessionCode: session.code,
+    userId: admin.id,
+    session: sessionObj,
+    user: { id: admin.id, name: admin.name, isAdmin: true }
   });
 });
 
+
 // updated by me
-
-
+// Join session
+// --- helpers (put near the top of the file, once) ---
 // --- helpers (put near the top of the file, once) ---
 function getClientIp(req) {
   const xfwd = req.headers['x-forwarded-for'];
@@ -194,7 +212,6 @@ app.post('/api/sessions/join', (req, res) => {
   });
 });
 
-// Join session
 
 
 // Get session
