@@ -1,0 +1,140 @@
+.vote-frequency {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid #e0e7ef;
+}
+
+/* Summary */
+.vote-summary {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.most-common {
+  background-color: #e8f5e9;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.participation {
+  background-color: #f3f6f9;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+/* Stats Row */
+.stats-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 15px;
+  background-color: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.stat-card {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  color: #2d3a4a;
+  font-weight: bold;
+}
+
+/* Frequency Cards */
+.frequency-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.frequency-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e7ef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  min-width: 100px;
+}
+
+.frequency-card.majority {
+  background-color: #f8f9fa;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.point {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2d3a4a;
+  margin-bottom: 4px;
+}
+
+.count {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.percentage {
+  color: #999;
+  font-size: 0.8rem;
+  margin-left: 4px;
+}
+
+/* Mobile Overrides */
+@media (max-width: 768px) {
+  .vote-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-stats {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .stats-row {
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+  }
+
+  .frequency-cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .frequency-card {
+    width: 100%;
+    min-width: auto;
+  }
+}

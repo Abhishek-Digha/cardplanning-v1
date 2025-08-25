@@ -14,38 +14,38 @@ export default function AdminControls() {
   const submittedCount = session?.members?.filter(m => votes && votes[m.id] !== undefined).length || 0;
 
   const handleKick = async (memberId) => {
-  if (!window.confirm("Are you sure you want to remove this participant?")) return;
+    if (!window.confirm("Are you sure you want to remove this participant?")) return;
 
-  try {
-    setUpdating(true);
+    try {
+      setUpdating(true);
 
-    // Make sure memberId is defined
-    if (!memberId) throw new Error("memberId is undefined");
+      // Make sure memberId is defined
+      if (!memberId) throw new Error("memberId is undefined");
 
-    await sessionAPI.removeMember(session.id, memberId);
+      await sessionAPI.removeMember(session.id, memberId);
 
-    // Update session.members locally
-    const updatedMembers = session.members.filter(m => m.id !== memberId);
-    dispatch({
-      type: 'SET',
-      payload: {
-        session: { ...session, members: updatedMembers },
-        totalMembers: updatedMembers.length,
-      }
-    });
+      // Update session.members locally
+      const updatedMembers = session.members.filter(m => m.id !== memberId);
+      dispatch({
+        type: 'SET',
+        payload: {
+          session: { ...session, members: updatedMembers },
+          totalMembers: updatedMembers.length,
+        }
+      });
 
-  } catch (err) {
-    console.error("❌ Failed to remove member:", err);
-  } finally {
-    setUpdating(false);
-  }
-};
+    } catch (err) {
+      console.error("❌ Failed to remove member:", err);
+    } finally {
+      setUpdating(false);
+    }
+  };
 
 
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', padding: '2vw 0' }}>
-      
+
       {/* Voting Status */}
       <div style={{
         background: '#fff',
@@ -97,14 +97,14 @@ export default function AdminControls() {
                 {user.isAdmin && (
                   <td style={{ textAlign: 'center', borderBottom: '1px solid #f3f6fa' }}>
                     <FaUserSlash
-  onClick={() => handleKick(member.id)}  // ✅ make sure member.id is passed
-  style={{
-    cursor: updating || member.id === user.id ? 'not-allowed' : 'pointer',
-    color: '#dc2626',
-    fontSize: 20
-  }}
-  title="Kick Member"
-/>
+                      onClick={() => handleKick(member.id)}  // ✅ make sure member.id is passed
+                      style={{
+                        cursor: updating || member.id === user.id ? 'not-allowed' : 'pointer',
+                        color: '#dc2626',
+                        fontSize: 20
+                      }}
+                      title="Kick Member"
+                    />
 
                   </td>
                 )}
