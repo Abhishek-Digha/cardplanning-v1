@@ -20,7 +20,7 @@ function App(){
           onLeaveSession={()=>{
             setSessionData(null);
             setView('landing');
-            window.location.href = "/";
+            window.location.href = "/cardplanning-v1";
             
           }}
         />
