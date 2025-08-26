@@ -18,8 +18,10 @@ function App(){
         <SessionRoom 
           sessionData={sessionData} 
           onLeaveSession={()=>{
-            setView('landing');
             setSessionData(null);
+            setView('landing');
+            window.location.href = "/";
+            
           }}
         />
       )}

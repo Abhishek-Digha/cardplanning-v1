@@ -68,7 +68,7 @@ socket.on('memberRemoved', ({ memberId }) => {
       payload: { session: null, user: null, votes: {}, voteCount: 0, isRevealed: false } 
     });
     alert('You have been removed from this session.');
-     window.location.href = `${window.location.origin}/cardplanning`;
+     window.location.href = `${window.location.origin}/cardplanning-v1`;
     return;
   }
 
